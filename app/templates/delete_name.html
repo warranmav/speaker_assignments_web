@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Delete Name</h2>
+
+<form method="post" action="{{ url_for('name_management.delete_name') }}">
+    <label for="record_id">Select Name:</label>
+    <select id="record_id" name="record_id">
+        {% for record in records %}
+        <option value="{{ record.id }}">{{ record.name }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Delete</button>
+</form>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul class="flashes">
+        {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Import Names</h2>
+
+<form method="post" action="{{ url_for('import_names.import_names') }}" enctype="multipart/form-data">
+    <label for="file">Choose CSV file:</label>
+    <input type="file" id="file" name="file" accept=".csv" required>
+    <button type="submit">Upload</button>
+</form>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul class="flashes">
+        {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+{% endblock %}

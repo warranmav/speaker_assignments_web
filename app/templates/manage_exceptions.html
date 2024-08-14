@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Manage Exceptions</h2>
+<ul>
+    <li><a href="{{ url_for('exception.add_exception') }}">Add Exception</a></li>
+    <li><a href="{{ url_for('exception.update_exception') }}">Update Exception</a></li>
+    <li><a href="{{ url_for('exception.remove_exception') }}">Remove Exception</a></li>
+    <li><a href="{{ url_for('exception.set_available') }}">Set as Available</a></li>
+</ul>
+{% endblock %}

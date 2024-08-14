@@ -1,0 +1,10 @@
+<!-- app/templates/tools_menu.html -->
+
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Tools</h1>
+<ul>
+    <li><a href="{{ url_for('tools.cleanup_db') }}">Clean Up Database</a></li>
+</ul>
+{% endblock %}

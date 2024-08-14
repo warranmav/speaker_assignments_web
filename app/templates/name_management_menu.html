@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Name Management</h2>
+<ul>
+    <li><a href="{{ url_for('name_management.add_name') }}">Add Name</a></li>
+    <li><a href="{{ url_for('name_management.view_database') }}">View Database</a></li>
+    <li><a href="{{ url_for('name_management.delete_name') }}">Delete Name</a></li>
+    <li><a href="{{ url_for('name_management.manage_exceptions') }}">Manage Exceptions</a></li>
+    <li><a href="{{ url_for('import_names.import_names') }}">Import Names</a></li>
+</ul>
+{% endblock %}

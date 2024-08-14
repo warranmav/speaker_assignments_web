@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Welcome to Speaker Assignments</h1>
+
+<h2>Current Month's Assignments</h2>
+{% if assignments %}
+    <ul>
+        {% for record in assignments %}
+        <li>{{ record.date_last_spoken }} - {{ record.name }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No assignments for this month.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Assignments</h2>
+
+{% for year_month, records in assignments.items() %}
+    <h3>{{ year_month }}</h3>
+    <ul>
+        {% for record in records %}
+        <li>{{ record.date_last_spoken }} - {{ record.name }}</li>
+        {% endfor %}
+    </ul>
+{% endfor %}
+
+{% endblock %}
