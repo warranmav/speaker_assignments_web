@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from app.models import db, Record
+from app.models import db, Record, TalkAssignment, Theme, Topic
 from datetime import datetime
 
 bp = Blueprint('assign', __name__, url_prefix='/assign')
@@ -18,11 +18,17 @@ def assign_talk():
             flash('Invalid date format. Use YYYY-MM-DD.', 'error')
             return redirect(url_for('assign.assign_talk'))
 
-        record = Record.query.get(record_id)
-        if record:
-            record.date_last_spoken = date
-            record.speaker_pos = speaker_pos
-            record.talk_length = talk_length
+        # Find the speaker and check if they exist
+        speaker = Record.query.get(record_id)
+        if speaker:
+            # Create a new TalkAssignment entry
+            new_assignment = TalkAssignment(
+                speaker_id=speaker.id,
+                date=date,
+                speaker_pos=speaker_pos,
+                talk_length=talk_length
+            )
+            db.session.add(new_assignment)
             db.session.commit()
             flash('Talk assigned successfully.', 'success')
         else:
