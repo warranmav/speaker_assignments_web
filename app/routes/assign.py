@@ -4,6 +4,12 @@ from datetime import datetime
 
 bp = Blueprint('assign', __name__, url_prefix='/assign')
 
+# Manage Assignments Menu
+@bp.route('/manage_assignments_menu', methods=['GET'])
+def manage_assignments_menu():
+    return render_template('manage_assignments_menu.html')
+
+# Route to assign a talk
 @bp.route('/talk', methods=['GET', 'POST'])
 def assign_talk():
     if request.method == 'POST':
@@ -39,3 +45,33 @@ def assign_talk():
     names = Record.query.filter(Record.included_in_pool == True).order_by(Record.name).all()
 
     return render_template('assign_talk.html', names=names)
+
+# Route to manage assignments (view all assignments)
+@bp.route('/manage', methods=['GET'])
+def manage_assignments():
+    assignments = TalkAssignment.query.all()
+    return render_template('manage_assignments.html', assignments=assignments)
+
+# Route to update an assignment
+@bp.route('/update/<int:assignment_id>', methods=['GET', 'POST'])
+def update_assignment(assignment_id):
+    assignment = TalkAssignment.query.get_or_404(assignment_id)
+    if request.method == 'POST':
+        assignment.date = datetime.strptime(request.form['date'], '%Y-%m-%d').date()
+        assignment.speaker_pos = request.form['speaker_pos']
+        assignment.talk_length = request.form['talk_length']
+        db.session.commit()
+        flash('Assignment updated successfully.', 'success')
+        return redirect(url_for('assign.manage_assignments'))
+
+    records = Record.query.all()
+    return render_template('update_assignment.html', assignment=assignment, records=records)
+
+# Route to delete an assignment
+@bp.route('/delete/<int:assignment_id>', methods=['POST'])
+def delete_assignment(assignment_id):
+    assignment = TalkAssignment.query.get_or_404(assignment_id)
+    db.session.delete(assignment)
+    db.session.commit()
+    flash('Assignment deleted successfully.', 'success')
+    return redirect(url_for('assign.manage_assignments'))

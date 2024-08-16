@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Update Assignment</h2>
+
+<form method="post" action="{{ url_for('assign.update_assignment', assignment_id=assignment.id) }}">
+    <label for="record_id">Select Name:</label>
+    <select id="record_id" name="record_id">
+        {% for record in records %}
+        <option value="{{ record.id }}" {% if assignment.speaker_id == record.id %}selected{% endif %}>{{ record.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="date">Date (YYYY-MM-DD):</label>
+    <input type="text" id="date" name="date" value="{{ assignment.date }}" required>
+
+    <label for="speaker_pos">Speaker Position:</label>
+    <select id="speaker_pos" name="speaker_pos" required>
+        <option value="First" {% if assignment.speaker_pos == 'First' %}selected{% endif %}>First</option>
+        <option value="Second" {% if assignment.speaker_pos == 'Second' %}selected{% endif %}>Second</option>
+        <option value="Third" {% if assignment.speaker_pos == 'Third' %}selected{% endif %}>Third</option>
+        <option value="Final" {% if assignment.speaker_pos == 'Final' %}selected{% endif %}>Final</option>
+    </select>
+
+    <label for="talk_length">Length of Talk:</label>
+    <select id="talk_length" name="talk_length" required>
+        <option value="3 Minutes" {% if assignment.talk_length == '3 Minutes' %}selected{% endif %}>3 Minutes</option>
+        <option value="5 Minutes" {% if assignment.talk_length == '5 Minutes' %}selected{% endif %}>5 Minutes</option>
+        <option value="10 Minutes" {% if assignment.talk_length == '10 Minutes' %}selected{% endif %}>10 Minutes</option>
+        <option value="15 Minutes" {% if assignment.talk_length == '15 Minutes' %}selected{% endif %}>15 Minutes</option>
+        <option value="20 Minutes" {% if assignment.talk_length == '20 Minutes' %}selected{% endif %}>20 Minutes</option>
+    </select>
+
+    <button type="submit">Update Assignment</button>
+</form>
+
+<a href="{{ url_for('assign.manage_assignments') }}">Back to Manage Assignments</a>
+{% endblock %}
