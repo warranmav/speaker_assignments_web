@@ -42,9 +42,11 @@ def assign_talk():
         return redirect(url_for('assign.assign_talk'))
 
     # Fetch names from the database, sorted alphabetically
-    names = Record.query.filter(Record.included_in_pool == True).order_by(Record.name).all()
+    # Adjust filtering logic as needed
+    names = Record.query.order_by(Record.name).all()
 
     return render_template('assign_talk.html', names=names)
+
 
 # Route to manage assignments (view all assignments)
 @bp.route('/manage', methods=['GET'])
