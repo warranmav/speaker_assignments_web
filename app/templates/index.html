@@ -4,12 +4,28 @@
 <h1>Welcome to Speaker Assignments</h1>
 
 <h2>Current Month's Assignments</h2>
+
 {% if assignments %}
-    <ul>
-        {% for record in assignments %}
-        <li>{{ record.date_last_spoken }} - {{ record.name }}</li>
-        {% endfor %}
-    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 20%;">Date</th>
+                <th style="width: 30%;">Name</th>
+                <th style="width: 25%;">Position</th>
+                <th style="width: 25%;">Length</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for assignment in assignments %}
+            <tr>
+                <td>{{ assignment.date.strftime('%Y-%m-%d') }}</td>
+                <td>{{ assignment.speaker.name }}</td>
+                <td>{{ assignment.speaker_pos }}</td>
+                <td>{{ assignment.talk_length }} Minutes</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% else %}
     <p>No assignments for this month.</p>
 {% endif %}

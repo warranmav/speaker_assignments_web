@@ -1,15 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Assignments</h2>
+    {% include '_navigation.html' %}
 
-{% for year_month, records in assignments.items() %}
-    <h3>{{ year_month }}</h3>
-    <ul>
-        {% for record in records %}
-        <li>{{ record.date_last_spoken }} - {{ record.name }}</li>
-        {% endfor %}
-    </ul>
-{% endfor %}
+    <h1>Assignments</h1>
 
+    {% for year_month, assignments_list in assignments.items() %}
+        <h2>{{ year_month }}</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 20%;">Date</th>
+                    <th style="width: 30%;">Name</th>
+                    <th style="width: 25%;">Position</th>
+                    <th style="width: 25%;">Length</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for assignment in assignments_list %}
+                    <tr>
+                        <td>{{ assignment.date.strftime('%Y-%m-%d') }}</td>
+                        <td>{{ assignment.speaker.name }}</td>
+                        <td>{{ assignment.speaker_pos }}</td>
+                        <td>{{ assignment.talk_length }} Minutes</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
 {% endblock %}

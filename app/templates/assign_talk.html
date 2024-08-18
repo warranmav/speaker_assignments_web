@@ -1,46 +1,47 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Assign Talk</h2>
+    {% include '_navigation.html' %}
+    <h2>Assign Talk</h2>
 
-<form method="post" action="{{ url_for('assign.assign_talk') }}">
-    <label for="record_id">Select Name:</label>
-    <select id="record_id" name="record_id">
-        {% for record in names %}
-        <option value="{{ record.id }}">{{ record.name }}</option>
-        {% endfor %}
-    </select>
+    <form method="post" action="{{ url_for('assign.assign_talk') }}">
+        <label for="record_id">Select Name:</label>
+        <select id="record_id" name="record_id">
+            {% for record in names %}
+            <option value="{{ record.id }}">{{ record.name }}</option>
+            {% endfor %}
+        </select>
 
-    <label for="date">Date (YYYY-MM-DD):</label>
-    <input type="text" id="date" name="date" required>
+        <label for="date">Date (YYYY-MM-DD):</label>
+        <input type="text" id="date" name="date" required>
 
-    <label for="speaker_pos">Speaker Position:</label>
-    <select id="speaker_pos" name="speaker_pos" required>
-        <option value="First">First</option>
-        <option value="Second">Second</option>
-        <option value="Third">Third</option>
-        <option value="Final">Final</option>
-    </select>
+        <label for="speaker_pos">Speaker Position:</label>
+        <select id="speaker_pos" name="speaker_pos" required>
+            <option value="First">First</option>
+            <option value="Second">Second</option>
+            <option value="Third">Third</option>
+            <option value="Final">Final</option>
+        </select>
 
-    <label for="talk_length">Length of Talk:</label>
-    <select id="talk_length" name="talk_length" required>
-        <option value="3 Minutes">3 Minutes</option>
-        <option value="5 Minutes">5 Minutes</option>
-        <option value="10 Minutes">10 Minutes</option>
-        <option value="15 Minutes">15 Minutes</option>
-        <option value="20 Minutes">20 Minutes</option>
-    </select>
+        <label for="talk_length">Length of Talk:</label>
+        <select id="talk_length" name="talk_length" required>
+            <option value="3 Minutes">3 Minutes</option>
+            <option value="5 Minutes">5 Minutes</option>
+            <option value="10 Minutes">10 Minutes</option>
+            <option value="15 Minutes">15 Minutes</option>
+            <option value="20 Minutes">20 Minutes</option>
+        </select>
 
-    <button type="submit">Assign Talk</button>
-</form>
+        <button type="submit">Assign Talk</button>
+    </form>
 
-{% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-        <ul class="flashes">
-        {% for category, message in messages %}
-            <li class="{{ category }}">{{ message }}</li>
-        {% endfor %}
-        </ul>
-    {% endif %}
-{% endwith %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes">
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
 {% endblock %}
