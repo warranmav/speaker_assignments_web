@@ -1,7 +1,7 @@
 # app/routes/tools.py
 
 from flask import Blueprint, render_template, redirect, url_for
-from app import app, db
+from app import db
 from app.models import Record
 
 bp = Blueprint('tools', __name__, url_prefix='/tools')
