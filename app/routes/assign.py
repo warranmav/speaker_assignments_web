@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from app.models import db, Record, TalkAssignment, Theme, Topic
-from datetime import datetime
+from datetime import datetime, timedelta
+from sqlalchemy.orm import aliased
+from sqlalchemy import or_, func
 
 bp = Blueprint('assign', __name__, url_prefix='/assign')
 
@@ -25,7 +27,7 @@ def assign_talk():
             return redirect(url_for('assign.assign_talk'))
 
         # Find the speaker and check if they exist
-        speaker = Record.query.get(record_id)
+        speaker = db.session.get(Record, record_id)  # Updated to use Session.get()
         if speaker:
             # Create a new TalkAssignment entry
             new_assignment = TalkAssignment(
@@ -41,11 +43,33 @@ def assign_talk():
             flash('Name not found in the database.', 'error')
         return redirect(url_for('assign.assign_talk'))
 
-    # Fetch names from the database, sorted alphabetically
-    # Adjust filtering logic as needed
-    names = Record.query.order_by(Record.name).all()
+    # Calculate the cutoff date (150 days ago)
+    cutoff_date = datetime.today() - timedelta(days=150)
 
-    return render_template('assign_talk.html', names=names)
+    # Aliased instance for filtering based on the last talk date
+    LastTalk = aliased(TalkAssignment)
+
+    # Subquery to get the last talk date for each speaker
+    last_talk_subquery = db.session.query(
+        LastTalk.speaker_id,
+        func.max(LastTalk.date).label('last_talk_date')
+    ).group_by(LastTalk.speaker_id).subquery()
+
+    # Query to filter speakers based on the last talk date and exception status
+    eligible_names = db.session.query(Record).outerjoin(
+        last_talk_subquery, Record.id == last_talk_subquery.c.speaker_id
+    ).filter(
+        or_(
+            last_talk_subquery.c.last_talk_date == None,
+            last_talk_subquery.c.last_talk_date < cutoff_date
+        ),
+        or_(
+            Record.exception == None,
+            Record.exception == 'Available'
+        )
+    ).order_by(Record.name).all()
+
+    return render_template('assign_talk.html', names=eligible_names)
 
 
 # Route to manage assignments (view all assignments)
