@@ -30,12 +30,11 @@ def add_name():
 
     return render_template('add_name.html')
 
-
 @bp.route('/delete', methods=['GET', 'POST'])
 def delete_name():
     if request.method == 'POST':
         record_id = request.form['record_id']
-        record = Record.query.get(record_id)
+        record = db.session.get(Record, record_id)  # Updated to use Session.get()
         if record:
             db.session.delete(record)
             db.session.commit()
