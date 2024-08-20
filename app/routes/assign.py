@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from app.models import db, Record, TalkAssignment, Theme, Topic
 from datetime import datetime, timedelta
 from sqlalchemy.orm import aliased
-from sqlalchemy import and_, or_, func
+from sqlalchemy import or_, func
 
 bp = Blueprint('assign', __name__, url_prefix='/assign')
 
@@ -27,7 +27,7 @@ def assign_talk():
             return redirect(url_for('assign.assign_talk'))
 
         # Find the speaker and check if they exist
-        speaker = Record.query.get(record_id)
+        speaker = db.session.get(Record, record_id)  # Updated to use Session.get()
         if speaker:
             # Create a new TalkAssignment entry
             new_assignment = TalkAssignment(
