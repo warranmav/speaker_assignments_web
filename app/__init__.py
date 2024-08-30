@@ -7,7 +7,15 @@ migrate = Migrate()
 
 def create_app(config_name='DevelopmentConfig'):
     app = Flask(__name__)
-    app.config.from_object(f'config.{config_name}')
+
+    # Map config_name to the correct config class
+    config_class = {
+        'development': 'config.DevelopmentConfig',
+        'testing': 'config.TestingConfig',
+        'production': 'config.ProductionConfig'
+    }.get(config_name.lower(), 'config.DevelopmentConfig')
+
+    app.config.from_object(config_class)
 
     db.init_app(app)
     migrate.init_app(app, db)

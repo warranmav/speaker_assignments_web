@@ -10,7 +10,7 @@ bp = Blueprint('delete', __name__, url_prefix='/delete')
 def delete_entry():
     if request.method == 'POST':
         record_id = request.form['record_id']
-        record = Record.query.get(record_id)
+        record = db.session.get(Record, record_id)  # Updated line
         if record:
             db.session.delete(record)
             db.session.commit()
