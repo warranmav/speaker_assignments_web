@@ -18,7 +18,7 @@ def add_name():
             flash(f"Name '{name}' already exists in the database.", 'error')
         else:
             # Only include 'name' and 'exception' since 'included_in_pool' was removed
-            new_record = Record(name=name, exception='None')
+            new_record = Record(name=name, exception=None)
             db.session.add(new_record)
             db.session.commit()
             flash(f"Name '{name}' added to database.", 'success')
