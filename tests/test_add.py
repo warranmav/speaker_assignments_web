@@ -4,7 +4,7 @@ from app import create_app, db
 class AddNameTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.app = create_app('TestingConfig')  # Use the testing configuration
+        self.app = create_app('testing')  # Use the testing configuration
         self.client = self.app.test_client()
         with self.app.app_context():
             db.create_all()

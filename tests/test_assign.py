@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 class AssignTalkTestCase(unittest.TestCase):
     def setUp(self):
         """Set up a test database and test client."""
-        self.app = create_app('TestingConfig')  # Use the TestingConfig for this test case
+        self.app = create_app('testing')  # Use the TestingConfig for this test case
         self.client = self.app.test_client()  # Create a test client to make requests
         self.app_context = self.app.app_context()
         self.app_context.push()

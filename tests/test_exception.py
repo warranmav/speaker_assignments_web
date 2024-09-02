@@ -8,7 +8,7 @@ class ExceptionTestCase(unittest.TestCase):
 
     def setUp(self):
         # Setup the Flask test client and the database for testing
-        self.app = create_app('TestingConfig')
+        self.app = create_app('testing')
         self.client = self.app.test_client()
         self.app_context = self.app.app_context()
         self.app_context.push()

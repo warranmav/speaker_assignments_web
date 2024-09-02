@@ -5,7 +5,7 @@ from app.models import Record
 class NameManagementTestCase(unittest.TestCase):
     def setUp(self):
         """Set up a test database and test client."""
-        self.app = create_app('TestingConfig')
+        self.app = create_app('testing')
         self.client = self.app.test_client()
         self.app_context = self.app.app_context()
         self.app_context.push()
