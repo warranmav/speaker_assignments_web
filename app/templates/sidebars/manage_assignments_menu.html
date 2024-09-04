@@ -1,0 +1,6 @@
+<h2>Manage Assignments</h2>
+<ul>
+    <li><a href="{{ url_for('assign.assign_talk') }}" class="{% if request.endpoint == 'assign.assign_talk' %}active{% endif %}">Assign Talk</a></li>
+    <li><a href="{{ url_for('assign.manage_assignments') }}" class="{% if request.endpoint == 'assign.manage_assignments' %}active{% endif %}">Manage Assignments</a></li>
+    <li><a href="{{ url_for('view.view_assignments') }}" class="{% if request.endpoint == 'view.view_assignments' %}active{% endif %}">View Assignments</a></li>
+</ul>

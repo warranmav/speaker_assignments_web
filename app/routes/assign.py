@@ -11,6 +11,10 @@ bp = Blueprint('assign', __name__, url_prefix='/assign')
 def manage_assignments_menu():
     return render_template('manage_assignments_menu.html')
 
+@bp.route('/')
+def index():
+    return render_template('manage_assignments_menu.html')
+
 # Route to assign a talk
 @bp.route('/talk', methods=['GET', 'POST'])
 def assign_talk():

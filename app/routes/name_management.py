@@ -8,6 +8,10 @@ bp = Blueprint('name_management', __name__, url_prefix='/name_management')
 def name_management_menu():
     return render_template('name_management_menu.html')
 
+@bp.route('/')
+def index():
+    return render_template('name_management_menu.html')
+
 
 @bp.route('/add', methods=['GET', 'POST'])
 def add_name():
@@ -54,6 +58,6 @@ def view_database():
     return render_template('view_database.html', records=records)
 
 
-@bp.route('/exceptions', methods=['GET'])
+@bp.route('/exception', methods=['GET'])
 def manage_exceptions():
     return render_template('manage_exceptions.html')

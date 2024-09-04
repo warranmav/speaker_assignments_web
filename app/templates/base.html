@@ -1,24 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Speaker Assignments</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Speaker Assignments{% endblock %}</title>
+        
+        <!-- Include Bootstrap CSS -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        
+        <!-- Your custom styles -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    </head>
+    
 <body>
-    <nav>
-        <!-- Navigation links -->
-        <ul>
-            <li><a href="{{ url_for('main.index') }}">Home</a></li>
-            <li><a href="{{ url_for('name_management.name_management_menu') }}">Name Management</a></li>
-            <li><a href="{{ url_for('assign.manage_assignments_menu') }}">Manage Assignments</a></li>
-            <li><a href="{{ url_for('import_names.import_names') }}">Import Names</a></li>
-            <li><a href="{{ url_for('tools.cleanup_db') }}">Tools</a></li>
-        </ul>
-    </nav>
-    <div class="container">
-        {% block content %}{% endblock %}
+
+    <header>
+        <h1>Speaker Assignments</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('main.index') }}">Home</a></li>
+                <li><a href="{{ url_for('name_management.index') }}">Name Management</a></li>
+                <li><a href="{{ url_for('assign.index') }}">Manage Assignments</a></li>
+                <li><a href="#">Tools</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main-content">
+        <div class="sidebar">
+            {% block sidebar %}
+            {% if 'name_management' in request.endpoint %}
+                {% include 'sidebars/name_management_menu.html' %}
+            {% elif 'assign' in request.endpoint %}
+                {% include 'sidebars/manage_assignments_menu.html' %}
+            {% endif %}
+            {% endblock %}
+        </div>
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
     </div>
+
+    <!-- Include jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <!-- Include Popper.js (required for some Bootstrap components) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+
+    <!-- Include Bootstrap JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>

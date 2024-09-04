@@ -1,0 +1,16 @@
+<h2>Name Management</h2>
+<ul class="list-unstyled">
+    <li><a class="d-block py-2" href="{{ url_for('name_management.add_name') }}">Add Name</a></li>
+    <li><a class="d-block py-2" href="{{ url_for('name_management.view_database') }}">View Database</a></li>
+    <li><a class="d-block py-2" href="{{ url_for('name_management.delete_name') }}">Delete Name</a></li>
+    <li>
+        <a class="d-block py-2" href="#exceptions-submenu" data-toggle="collapse" aria-expanded="false" aria-controls="exceptions-submenu">Manage Exceptions</a>
+        <ul id="exceptions-submenu" class="collapse list-unstyled pl-3">
+            <li><a class="d-block py-1" href="{{ url_for('exception.add_exception') }}">Add Exception</a></li>
+            <li><a class="d-block py-1" href="{{ url_for('exception.update_exception') }}">Update Exception</a></li>
+            <li><a class="d-block py-1" href="{{ url_for('exception.remove_exception') }}">Remove Exception</a></li>
+            <li><a class="d-block py-1" href="{{ url_for('exception.set_available') }}">Set as Available</a></li>
+        </ul>
+    </li>
+    <li><a class="d-block py-2" href="{{ url_for('import_names.import_names') }}">Import Names</a></li>
+</ul>
