@@ -121,15 +121,4 @@ p {
     flex-grow: 1;
     padding: 20px;
 }
-/* 
-#exceptions-submenu 
-{
-    display: none;
-    list-style-type: none;
-    padding-left: 20px;
-}
 
-#exceptions-submenu.collapsed 
-{
-    display: block;
-} */
