@@ -1,0 +1,7 @@
+<h2>Manage Exceptions</h2>
+<ul class="list-unstyled">
+    <li><a href="{{ url_for('exception.add_exception') }}" class="{% if request.endpoint == 'exception.add_exception' %}active{% endif %}">Add Exception</a></li>
+    <li><a href="{{ url_for('exception.update_exception') }}" class="{% if request.endpoint == 'exception.update_exception' %}active{% endif %}">Update Exception</a></li>
+    <li><a href="{{ url_for('exception.remove_exception') }}" class="{% if request.endpoint == 'exception.remove_exception' %}active{% endif %}">Remove Exception</a></li>
+    <li><a href="{{ url_for('exception.set_available') }}" class="{% if request.endpoint == 'exception.set_available' %}active{% endif %}">Set as Available</a></li>
+</ul>

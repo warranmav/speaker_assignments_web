@@ -33,6 +33,8 @@
                 {% include 'sidebars/name_management_menu.html' %}
             {% elif 'assign' in request.endpoint %}
                 {% include 'sidebars/manage_assignments_menu.html' %}
+            {% elif 'exception' in request.endpoint %}
+                {% include 'sidebars/exception_sidebar.html' %}
             {% endif %}
             {% endblock %}
         </div>
