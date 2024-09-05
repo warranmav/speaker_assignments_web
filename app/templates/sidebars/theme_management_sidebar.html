@@ -1,0 +1,11 @@
+<h2>Theme Management</h2>
+<ul class="list-unstyled">
+    <li>
+        <a href="#theme-submenu" data-toggle="collapse" aria-expanded="false" aria-controls="theme-submenu">Manage Themes</a>
+        <ul id="theme-submenu" class="collapse list-unstyled pl-3">
+            <li><a href="{{ url_for('theme_management.add_theme') }}" class="{% if request.endpoint == 'theme_management.add_theme' %}active{% endif %}">Add Theme</a></li>
+            <li><a href="{{ url_for('theme_management.update_theme') }}" class="{% if request.endpoint == 'theme_management.update_theme' %}active{% endif %}">Update Theme</a></li>
+            <li><a href="{{ url_for('theme_management.delete_theme') }}" class="{% if request.endpoint == 'theme_management.delete_theme' %}active{% endif %}">Delete Theme</a></li>
+        </ul>
+    </li>
+</ul>

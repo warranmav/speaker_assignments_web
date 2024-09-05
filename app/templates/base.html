@@ -21,6 +21,7 @@
                 <li><a href="{{ url_for('main.index') }}">Home</a></li>
                 <li><a href="{{ url_for('name_management.index') }}">Name Management</a></li>
                 <li><a href="{{ url_for('assign.index') }}">Manage Assignments</a></li>
+                <li><a href="{{ url_for('theme_management.index') }}">Theme Management</a></li>
                 <li><a href="#">Tools</a></li>
             </ul>
         </nav>
@@ -35,6 +36,8 @@
                 {% include 'sidebars/manage_assignments_menu.html' %}
             {% elif 'exception' in request.endpoint %}
                 {% include 'sidebars/exception_sidebar.html' %}
+            {% elif 'theme_management' in request.endpoint %}
+                {% include 'sidebars/theme_management_sidebar.html' %}    
             {% endif %}
             {% endblock %}
         </div>

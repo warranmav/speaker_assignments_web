@@ -2,6 +2,8 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
+from app.routes import theme_management
+
 db = SQLAlchemy()
 migrate = Migrate()
 
@@ -31,6 +33,7 @@ def create_app(config_name='DevelopmentConfig'):
     app.register_blueprint(name_management.bp)
     app.register_blueprint(import_names.bp)
     app.register_blueprint(tools.bp)
+    app.register_blueprint(theme_management.bp)
 
     # Ensure the database and tables are created
     with app.app_context():
